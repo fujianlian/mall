@@ -1,4 +1,7 @@
 // pages/home/home.js
+const qcloud = require('../../vendor/wafer2-client-sdk/index')
+const config = require('../../config.js')
+
 Page({
 
   /**
@@ -6,56 +9,14 @@ Page({
    */
   data: {
     // 商品列表
-    productList: [{
-      id: 1,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product1.jpg',
-      name: '商品1',
-      price: 100,
-      source: '国内·广东',
-    }, {
-      id: 2,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product2.jpg',
-      name: '商品2',
-      price: 200,
-      source: '国内·广东',
-    }, {
-      id: 3,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product3.jpg',
-      name: '商品3',
-      price: 300,
-      source: '国内·广东',
-    }, {
-      id: 4,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product4.jpg',
-      name: '商品4',
-      price: 400,
-      source: '国内·广东',
-    }, {
-      id: 5,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product5.jpg',
-      name: '商品5',
-      price: 500,
-      source: '国内·广东',
-    }, {
-      id: 6,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product5.jpg',
-      name: '商品6',
-      price: 600,
-      source: '国内·广东',
-    }, {
-      id: 7,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product5.jpg',
-      name: '商品7',
-      price: 700,
-      source: '国内·广东',
-    }]
+    productList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.getList()
   },
 
   /**
@@ -105,5 +66,37 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+
+  /**
+   * 获取商品列表
+   */
+  getList() {
+    let self = this
+    wx.showLoading({
+      title: '正在加载中...',
+    })
+    qcloud.request({
+      url: config.service.productList,
+      success: function(response) {
+        wx.hideLoading()
+        if (!response.data.code) {
+          wx.setStorageSync('productList', response.data.data)
+          self.setData({
+            productList: response.data.data
+          })
+        } else {
+          wx.showToast({
+            title: '加载数据失败',
+          })
+        }
+      },
+      fail: function(err) {
+        wx.hideLoading()
+        wx.showToast({
+          title: '加载数据失败',
+        })
+      }
+    });
   }
 })

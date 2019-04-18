@@ -3,7 +3,8 @@
     "pages/home/home",
     "pages/order/order",
     "pages/trolley/trolley",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/detail/detail"
   ],
   "tabBar": {
     "list": [
@@ -37,7 +38,7 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ececee",
-    "navigationBarTitleText": "Wafer Quick Start",
+    "navigationBarTitleText": "商城小程序",
     "navigationBarTextStyle": "black"
   }
 }

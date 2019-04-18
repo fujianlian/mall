@@ -1,0 +1,132 @@
+.top {
+  background: white;
+  padding: 30rpx 30rpx 20rpx;
+}
+
+.top-image {
+  height: 300rpx;
+  width: 300rpx;
+  margin-left: 195rpx;
+}
+
+.top-name {
+  font-size: 36rpx;
+  line-height: 50rpx;
+  margin-top: 20rpx;
+}
+
+.top-source {
+  font-size: 26rpx;
+  line-clamp: 35rpx;
+  opacity: 0.5;
+  margin-top: 5rpx;
+}
+
+.top-price-item {
+  align-items: center;
+  margin-top: 15rpx;
+  display: flex;
+  flex-flow: row-reverse;
+}
+
+.top-money {
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  border-radius: 50%;
+  color: #34373d;
+  font-weight: 900;
+  background: #f7e687;
+  font-size: 24rpx;
+}
+
+.top-price {
+  margin-left: 5rpx;
+  font-size: 30rpx;
+  line-height: 36rpx;
+}
+
+.service {
+  padding: 25rpx 20rpx 0;
+  margin: 30rpx;
+  background: white;
+  border-radius: 15rpx;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.05);
+}
+
+.service-promise {
+  display: flex;
+  margin-top: 15rpx;
+  align-items: center;
+}
+
+.service-check {
+  margin-right: 10rpx;
+  width: 22rpx;
+  height: 16rpx;
+}
+
+.service-promise-text {
+  align-items: 15rpx;
+  font-size: 26rpx;
+  opacity: 0.7;
+}
+
+.line {
+  background: #e6e6e6;
+  height: 1rpx;
+  margin-top: 36rpx;
+}
+
+.evaluation {
+  display: flex;
+  align-items: center;
+  height: 76rpx;
+}
+
+.evaluation-title {
+  flex: 1;
+  font-size: 28rpx;
+  line-height: 28rpx;
+}
+
+.evaluation-right {
+  width: 11rpx;
+  height: 18rpx;
+}
+
+.evaluation-num {
+  font-size: 18rpx;
+  line-height: 25rpx;
+  margin-right: 9rpx;
+  opacity: 0.4;
+}
+
+.opr{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+}
+
+.opr-trolley,
+.opr-buy {
+  flex: 1;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #34373D;
+  font-weight: bold;
+}
+
+.opr-trolley {
+  background: rgba(245, 224, 105, 0.6);
+}
+
+.opr-buy {
+  background: #F5E069;
+}

@@ -1,0 +1,30 @@
+<!--pages/detail/detail.wxml-->
+<view class='top'>
+  <image src="{{product.image}}" class='top-image'></image>
+  <view class='top-name'>{{product.name}}</view>
+  <view class='top-source'>{{product.source}}</view>
+  <view class='top-price-item'>
+    <view class='top-price'>{{product.price}}</view>
+    <view class='top-money'>￥</view>
+  </view>
+</view>
+<view class='service'>
+  <view class='service-promise'>
+    <image src="/images/check-yellow.png" class='service-check'></image>
+    <view class='service-promise-text'>7天免费退换</view>
+  </view>
+  <view class='service-promise'>
+    <image src="/images/check-yellow.png" class='service-check'></image>
+    <view class='service-promise-text'>24小时内发货并赠送运费险</view>
+  </view>
+  <view class='line'></view>
+  <view class='evaluation'>
+    <view class='evaluation-title'>已买评价</view>
+    <view class='evaluation-num'>1条</view>
+    <image src="/images/grey-arrow.png" class='evaluation-right'></image>
+  </view>
+</view>
+<view class='opr'>
+  <view class='opr-trolley'>加入购物车</view>
+  <view class='opr-buy'>立即购买</view>
+</view>

@@ -1,5 +1,5 @@
 <image src="/images/bg.png" class='bg'></image>
-<view class='hot-card'>
+<navigator url="/pages/detail/detail?id={{productList[0].id}}" class='hot-card'>
   <view class='hot-name'>
     <image src="/images/line-red.png" class='hot-name-line'></image>
     <view class='hot-name-text'>{{productList[0].name}}</view>
@@ -7,18 +7,18 @@
   </view>
   <image src="/images/discount.png" class='hot-image-discount'></image>
   <image src="{{productList[0].image}}" class='hot-image'></image>
-</view>
+</navigator>
 <view class='separator'>
   <image src="/images/line-black.png" class='separator-line'></image>
   <view class='separator-text'>春季推荐</view>
   <image src="/images/line-black.png" class='separator-line'></image>
 </view>
 <view wx:for='{{productList}}' wx:if='{{ index%2 === 1 }}' wx:key='list' class='list'>
-  <navigator wx:for='{{[productList[index],productList[index+1]]}}' wx:key="item" wx:for-index='pindex' wx:for-item='pitem' class='list-item'>
+  <navigator url="/pages/detail/detail?id={{pitem.id}}" wx:for='{{[productList[index],productList[index+1]]}}' wx:key="item" wx:for-index='pindex' wx:for-item='pitem' class='list-item'>
     <image src="{{pitem.image}}" class='list-item-image'></image>
     <view class='list-item-title'>{{pitem.name}}</view>
     <view class='list-item-bottom'>
-       <view class='list-item-bottom-icon'>￥</view>
+      <view class='list-item-bottom-icon'>￥</view>
       <view class='list-item-bottom-price'>{{pitem.price}}</view>
       <view class='list-item-bottom-icon'>+</view>
     </view>
