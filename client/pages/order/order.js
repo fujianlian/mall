@@ -1,5 +1,7 @@
 // pages/order/order.js
 const app = getApp()
+const qcloud = require('../../vendor/wafer2-client-sdk/index')
+const config = require('../../config.js')
 
 Page({
 
@@ -9,41 +11,7 @@ Page({
   data: {
     userInfo: null,
     locationAuthType: app.data.locationAuthType,
-    orderList: [{
-        id: 0,
-        list: [{
-          count: 1,
-          image: 'https://product-1259058662.cos.ap-shanghai.myqcloud.com/product1.jpg',
-          name: '商品1',
-          price: 50.5,
-        }]
-      },
-      {
-        id: 1,
-        list: [{
-            count: 1,
-            image: 'https://product-1259058662.cos.ap-shanghai.myqcloud.com/product1.jpg',
-            name: '商品1',
-            price: 50.5,
-          },
-          {
-            count: 1,
-            image: 'https://product-1259058662.cos.ap-shanghai.myqcloud.com/product1.jpg',
-            name: '商品2',
-            price: 50.5,
-          }
-        ]
-      },
-      {
-        id: 2,
-        list: [{
-          count: 1,
-          image: 'https://product-1259058662.cos.ap-shanghai.myqcloud.com/product1.jpg',
-          name: '商品2',
-          price: 50.5,
-        }]
-      }
-    ], // 订单列表
+    orderList: [], // 订单列表
   },
 
   onTapLogin: function() {
@@ -79,7 +47,45 @@ Page({
         this.setData({
           userInfo
         })
+        this.getOrder()
       }
     })
   },
+
+  getOrder() {
+    wx.showLoading({
+      title: '刷新订单数据...',
+    })
+
+    qcloud.request({
+      url: config.service.orderList,
+      login: true,
+      success: result => {
+        console.log("123");
+        wx.hideLoading()
+
+        let data = result.data
+        console.log(data)
+        if (!data.code) {
+          this.setData({
+            orderList: data.data
+          })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '刷新订单数据失败',
+          })
+        }
+      },
+      fail: () => {
+        wx.hideLoading()
+
+        wx.showToast({
+          icon: 'none',
+          title: '刷新订单数据失败',
+        })
+      }
+    })
+  },
+
 })
