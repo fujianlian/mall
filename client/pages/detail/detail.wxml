@@ -25,6 +25,6 @@
   </view>
 </view>
 <view class='opr'>
-  <view class='opr-trolley'>加入购物车</view>
+  <view class='opr-trolley' bindtap='addToTrolley'>加入购物车</view>
   <view class='opr-buy' bindtap='buy'>立即购买</view>
 </view>

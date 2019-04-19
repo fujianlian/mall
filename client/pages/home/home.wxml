@@ -20,7 +20,7 @@
     <view class='list-item-bottom'>
       <view class='list-item-bottom-icon'>￥</view>
       <view class='list-item-bottom-price'>{{pitem.price}}</view>
-      <view class='list-item-bottom-icon'>+</view>
+      <view class='list-item-bottom-icon' data-id="{{pitem.id}}" catchtap='addToTrolley'>+</view>
     </view>
   </navigator>
 </view>

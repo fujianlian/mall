@@ -109,5 +109,45 @@ App({
         error && error()
       }
     })
-  }
+  },
+
+  /**
+   * 添加商品至购物车
+   */
+  addToTrolley(productId) {
+    wx.showLoading({
+      title: '正在添加到购物车...',
+    })
+    qcloud.request({
+      url: config.service.addTrolley,
+      login: true,
+      method: 'PUT',
+      data: {
+        id: productId
+      },
+      success: result => {
+        wx.hideLoading()
+
+        let data = result.data
+
+        if (!data.code) {
+          wx.showToast({
+            title: '已添加到购物车',
+          })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '添加到购物车失败',
+          })
+        }
+      },
+      fail: (err) => {
+        wx.hideLoading()
+        wx.showToast({
+          icon: 'none',
+          title: '添加到购物车失败',
+        })
+      }
+    })
+  },
 })

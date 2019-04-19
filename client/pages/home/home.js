@@ -1,6 +1,7 @@
 // pages/home/home.js
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config.js')
+const app = getApp()
 
 Page({
 
@@ -49,5 +50,10 @@ Page({
         })
       }
     });
-  }
+  },
+
+  addToTrolley(event) {
+    let productId = event.currentTarget.dataset.id
+    app.addToTrolley(productId)
+  },
 })

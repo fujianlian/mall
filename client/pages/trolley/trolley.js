@@ -1,4 +1,6 @@
 // pages/trolley/trolley.js
+const qcloud = require('../../vendor/wafer2-client-sdk/index')
+const config = require('../../config.js')
 const app = getApp()
 
 Page({
@@ -9,7 +11,11 @@ Page({
   data: {
     userInfo: null,
     locationAuthType: app.data.locationAuthType,
-    trolleyList: []
+    trolleyList: [], // 购物车商品列表
+    trolleyCheckMap: [], // 购物车中选中的id哈希表
+    trolleyAccount: 45, // 购物车结算总价
+    isTrolleyEdit: false, // 购物车是否处于编辑状态
+    isTrolleyTotalCheck: true, // 购物车中商品是否全选
   },
 
   onTapLogin: function() {
@@ -21,6 +27,7 @@ Page({
           userInfo,
           locationAuthType: app.data.locationAuthType
         })
+        this.getList()
       },
       error: () => {
         this.setData({
@@ -45,7 +52,41 @@ Page({
         this.setData({
           userInfo
         })
+        this.getList()
       }
     })
+  },
+
+  /**
+   * 获取购物车列表
+   */
+  getList() {
+    let self = this
+    wx.showLoading({
+      title: '刷新购物车数据...',
+    })
+    qcloud.request({
+      url: config.service.trolleyList,
+      login: true,
+      success: function(response) {
+        wx.hideLoading()
+        console.log(response)
+        if (!response.data.code) {
+          self.setData({
+            trolleyList: response.data.data
+          })
+        } else {
+          wx.showToast({
+            title: '刷新数据失败',
+          })
+        }
+      },
+      fail: function(err) {
+        wx.hideLoading()
+        wx.showToast({
+          title: '刷新数据失败',
+        })
+      }
+    });
   },
 })

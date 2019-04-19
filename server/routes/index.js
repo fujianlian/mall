@@ -39,6 +39,10 @@ router.get('/product/:id', controllers.product.detail)
 router.post('/order', validationMiddleware, controllers.order.add)
 // 显示已购买订单
 router.get('/order', validationMiddleware, controllers.order.list)
+// 添加商品至购物车
+router.put('/trolley', validationMiddleware, controllers.trolley.add)
+// 购物车列表
+router.get('/trolley', validationMiddleware, controllers.trolley.list)
 
 module.exports = router
 
