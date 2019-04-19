@@ -40,6 +40,9 @@ var config = {
 
     // 购物车列表
     trolleyList: `${host}/weapp/trolley`,
+
+    // 更新购物车商品列表
+    updateTrolley: `${host}/weapp/trolley`,
   }
 };
 

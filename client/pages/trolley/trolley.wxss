@@ -132,14 +132,13 @@
   line-height: 100rpx;
   text-align: center;
   font-size: 30rpx;
-  background: rgba(245, 224, 105, 0.6);
+  background: #f5e069;
   color: rgba(52, 55, 61, 0.5);
   font-weight: bold;
 }
 
 .bottom-pay.canpay {
-  color: #34373d;
-  background: #f5e069;
+  color: #34373d
 }
 
 .bottom-text {

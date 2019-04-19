@@ -61,11 +61,8 @@ Page({
       url: config.service.orderList,
       login: true,
       success: result => {
-        console.log("123");
-        wx.hideLoading()
-
-        let data = result.data
-        console.log(data)
+        wx.hideLoading();
+        let data = result.data;
         if (!data.code) {
           this.setData({
             orderList: data.data
