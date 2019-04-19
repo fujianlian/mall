@@ -242,4 +242,56 @@ Page({
       }
     })
   },
+
+  onTapPay() {
+
+    if (!this.data.trolleyAccount) return
+
+    wx.showLoading({
+      title: '结算中...',
+    })
+
+    let self = this
+    let trolleyCheckMap = this.data.trolleyCheckMap
+    let trolleyList = this.data.trolleyList
+
+    let needToPayProductList = trolleyList.filter(product => {
+      return !!trolleyCheckMap[product.id]
+    })
+
+    qcloud.request({
+      url: config.service.addOrder,
+      login: true,
+      method: 'POST',
+      data: {
+        list: needToPayProductList,
+        isInstantBuy: false
+      },
+      success: result => {
+        wx.hideLoading()
+
+        let data = result.data
+
+        if (!data.code) {
+          wx.showToast({
+            title: '结算成功',
+          })
+          self.getTrolley()
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '结算失败',
+          })
+        }
+      },
+      fail: () => {
+        wx.hideLoading()
+
+        wx.showToast({
+          icon: 'none',
+          title: '结算失败',
+        })
+      }
+    })
+  },
 })

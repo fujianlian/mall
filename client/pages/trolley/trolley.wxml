@@ -53,6 +53,6 @@
     </view>
     <view class='bottom-text'>总价</view>
     <view class='bottom-price'>￥{{ trolleyAccount }}</view>
-    <view class="bottom-pay {{trolleyAccount ? 'canpay' : ''}}">结算</view>
+    <view class="bottom-pay {{trolleyAccount ? 'canpay' : ''}}" bindtap='onTapPay'>结算</view>
   </view>
 </view>
