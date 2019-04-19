@@ -11,4 +11,9 @@
   <button wx:if="{{locationAuthType==0}}" class="unlogin-btn" open-type='getUserInfo' bindgetuserinfo='onTapLogin'>微信登录</button>
   <button wx:if="{{locationAuthType==1}}" class="unlogin-btn" open-type='openSetting' bindopensetting="onTapLogin">授权登录</button>
 </view>
+<view wx:elif="{{ trolleyList.length === 0 }}" class="empty-list">
+  <image class="empty-image" src="/images/trolley.png"></image>
+  <view class="empty-text">购物车是空的</view>
+  <view class="empty-text">快添加物品进来吧</view>
+</view>
 <text wx:else>pages/trolley/trolley.wxml</text>
