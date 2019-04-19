@@ -27,7 +27,10 @@ var config = {
     productList: `${host}/weapp/product`,
 
     // 获取商品详情
-    productDetail: `${host}/weapp/product/`
+    productDetail: `${host}/weapp/product/`,
+
+    // 创建订单
+    addOrder: `${host}/weapp/order`,
   }
 };
 

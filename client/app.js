@@ -65,6 +65,7 @@ App({
       },
       fail: () => {
         error && error()
+        console.log(error)
       }
     })
   },
