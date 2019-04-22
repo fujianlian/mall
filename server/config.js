@@ -11,6 +11,11 @@ const CONF = {
   // 是否使用腾讯云代理登录小程序
   useQcloudLogin: false,
 
+  // 图片上传信息验证
+  qcloudAppId: '你的qcloudAppId',
+  qcloudSecretId: '你的qcloudSecretId',
+  qcloudSecretKey: '你的qcloudSecretKey',
+
   /**
    * MySQL 配置，用来存储 session 和用户信息
    * 若使用了腾讯云微信小程序解决方案

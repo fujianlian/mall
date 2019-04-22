@@ -10,6 +10,7 @@ Page({
   data: {
     product: null,
     commentValue: '',
+    commentImages: [],
   },
 
   /**
@@ -30,51 +31,108 @@ Page({
   },
 
   addComment(event) {
-    let content = this.data.commentValue
-    let productId = this.data.product.product_id
+    let content = this.data.commentValue;
     if (!content) return
 
     wx.showLoading({
       title: '正在发表评论'
     })
+    let productId = this.data.product.id
+    this.uploadImage(images => {
+      qcloud.request({
+        url: config.service.addComment,
+        login: true,
+        method: 'PUT',
+        data: {
+          images,
+          content,
+          productId
+        },
+        success: result => {
+          wx.hideLoading()
+          let data = result.data
+          if (!data.code) {
+            wx.showToast({
+              title: '发表评论成功'
+            })
 
-    qcloud.request({
-      url: config.service.addComment,
-      login: true,
-      method: 'PUT',
-      data: {
-        content: content,
-        productId: productId
-      },
-      success: result => {
-        wx.hideLoading()
-
-        let data = result.data
-
-        if (!data.code) {
-          wx.showToast({
-            title: '发表评论成功'
-          })
-          setTimeout(() => {
-            wx.navigateBack()
-          }, 1500)
-
-        } else {
+            setTimeout(() => {
+              wx.navigateBack()
+            }, 1500)
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '发表评论失败'
+            })
+          }
+        },
+        fail: () => {
+          wx.hideLoading();
           wx.showToast({
             icon: 'none',
             title: '发表评论失败'
-          })
+          });
         }
-      },
-      fail: (err) => {
-        console.log(err)
-        wx.hideLoading()
+      })
+    })
+  },
 
-        wx.showToast({
-          icon: 'none',
-          title: '发表评论失败'
+  chooseImage() {
+
+    wx.chooseImage({
+      count: 3,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: res => {
+
+        let commentImages = res.tempFilePaths
+
+        this.setData({
+          commentImages
+        });
+      },
+    })
+  },
+
+  previewImg(event) {
+    let target = event.currentTarget
+    let src = target.dataset.src
+
+    wx.previewImage({
+      current: src,
+      urls: this.data.commentImages
+    })
+  },
+
+  uploadImage(cb) {
+    let commentImages = this.data.commentImages
+    let images = []
+    if (commentImages.length) {
+      let length = commentImages.length
+      for (let i = 0; i < length; i++) {
+        wx.uploadFile({
+          url: config.service.uploadUrl,
+          filePath: commentImages[i],
+          name: 'file',
+          success: res => {
+            let data = JSON.parse(res.data)
+            length--
+
+            if (!data.code) {
+              images.push(data.data.imgUrl)
+            }
+
+            if (length <= 0) {
+              cb && cb(images)
+            }
+          },
+          fail: () => {
+            length--
+          }
         })
       }
-    })
+    } else {
+      cb && cb(images)
+    }
   },
 })

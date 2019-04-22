@@ -8,8 +8,12 @@ module.exports = {
 
     let product_id = ctx.request.body.productId
     let content = ctx.request.body.content || null
+
+    let images = ctx.request.body.images || []
+    images = images.join(';;')
+
     if (!isNaN(product_id)) {
-      await DB.query('INSERT INTO comment(user, username, avatar, content, product_id) VALUES (?, ?, ?, ?, ?)', [user, username, avatar, content, product_id])
+      await DB.query('INSERT INTO comment(user, username, avatar, content, images, product_id) VALUES (?, ?, ?, ?, ?, ?)', [user, username, avatar, content, images, product_id])
     }
 
     ctx.state.data = {}
