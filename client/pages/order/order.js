@@ -23,6 +23,7 @@ Page({
           userInfo,
           locationAuthType: app.data.locationAuthType
         })
+        this.getOrder()
       },
       error: () => {
         this.setData({
@@ -84,5 +85,12 @@ Page({
       }
     })
   },
+
+  goComment(event) {
+    let product = event.currentTarget.dataset.item
+    wx.navigateTo({
+      url: '/pages/add-comment/add-comment?data=' + JSON.stringify(product),
+    })
+  }
 
 })

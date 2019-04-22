@@ -29,7 +29,7 @@
         <view class="order-price">¥ {{item.price}}</view>
       </view>
       <view class="order-opr">
-        <view class="order-btn">评价</view>
+        <view class="order-btn" bindtap='goComment' data-item='{{item}}'>评价</view>
         <view class="order-count">x{{item.count}}</view>
       </view>
     </view>
