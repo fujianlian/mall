@@ -39,6 +39,9 @@ Page({
             commentList: data.data.map(item => {
               let itemDate = new Date(item.create_time)
               item.createTime = util.formatTime(itemDate)
+              if (item.images != null && item.images.length) {
+                item.images = item.images.split(';;')
+              }
               return item
             })
           })
@@ -47,6 +50,16 @@ Page({
       fail: err => {
         console.log(err)
       }
+    })
+  },
+
+  previewImg(event) {
+    let target = event.currentTarget
+    let current = target.dataset.current
+    let urls = target.dataset.urls
+    wx.previewImage({
+      current: current,
+      urls: urls
     })
   },
 })

@@ -37,7 +37,7 @@ Page({
     wx.showLoading({
       title: '正在发表评论'
     })
-    let productId = this.data.product.id
+    let productId = this.data.product.product_id
     this.uploadImage(images => {
       qcloud.request({
         url: config.service.addComment,
@@ -66,7 +66,8 @@ Page({
             })
           }
         },
-        fail: () => {
+        fail: (err) => {
+          console.log(err)
           wx.hideLoading();
           wx.showToast({
             icon: 'none',
@@ -78,17 +79,18 @@ Page({
   },
 
   chooseImage() {
-
+    let currentImages = this.data.commentImages
     wx.chooseImage({
       count: 3,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: res => {
-
-        let commentImages = res.tempFilePaths
-
+        currentImages = currentImages.concat(res.tempFilePaths)
+        let end = currentImages.length
+        let begin = Math.max(end - 3, 0)
+        currentImages = currentImages.slice(begin, end)
         this.setData({
-          commentImages
+          commentImages: currentImages
         });
       },
     })

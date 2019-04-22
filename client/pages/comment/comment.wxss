@@ -96,3 +96,15 @@
   height: 180rpx;
   border-radius: 10rpx;
 }
+
+.preview-cnt {
+  display: flex;
+  margin-top: 20rpx;
+}
+
+.preview-image {
+  margin-right: 10rpx;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 5rpx;
+}
