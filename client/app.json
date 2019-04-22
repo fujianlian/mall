@@ -5,7 +5,8 @@
     "pages/trolley/trolley",
     "pages/user/user",
     "pages/detail/detail",
-    "pages/add-comment/add-comment"
+    "pages/add-comment/add-comment",
+    "pages/comment/comment"
   ],
   "tabBar": {
     "list": [

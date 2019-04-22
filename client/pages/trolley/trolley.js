@@ -276,7 +276,7 @@ Page({
           wx.showToast({
             title: '结算成功',
           })
-          self.getTrolley()
+          self.getList()
         } else {
           wx.showToast({
             icon: 'none',

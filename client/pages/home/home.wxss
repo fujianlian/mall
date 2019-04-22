@@ -63,7 +63,7 @@
 
 .list {
   display: flex;
-  margin: 0 52rpx;
+  margin: 0 27rpx 0 52rpx;
   justify-content: space-around;
 }
 
@@ -71,8 +71,9 @@
   background: white;
   border-radius: 15rpx;
   box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.05);
-  width: 300rpx;
+  width: 100%;
   margin-bottom: 25rpx;
+  margin-right: 25rpx;
 }
 
 .list-item-image {

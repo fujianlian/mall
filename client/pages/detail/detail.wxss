@@ -79,10 +79,16 @@
   margin-top: 36rpx;
 }
 
+.evaluation-wrapper {
+  display: flex;
+  flex-flow: column;
+  padding-bottom: 10rpx;
+}
+
 .evaluation {
   display: flex;
   align-items: center;
-  height: 76rpx;
+  padding: 30rpx 0 20rpx;
 }
 
 .evaluation-title {
@@ -103,7 +109,14 @@
   opacity: 0.4;
 }
 
-.opr{
+.evaluation-text {
+  font-size: 24rpx;
+  line-height: 34rpx;
+  margin-bottom: 15rpx;
+  opacity: 0.9;
+}
+
+.opr {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -112,14 +125,13 @@
   align-items: center;
 }
 
-.opr-trolley,
-.opr-buy {
+.opr-trolley, .opr-buy {
   flex: 1;
   height: 100rpx;
   line-height: 100rpx;
   text-align: center;
   font-size: 30rpx;
-  color: #34373D;
+  color: #34373d;
   font-weight: bold;
 }
 
@@ -128,5 +140,5 @@
 }
 
 .opr-buy {
-  background: #F5E069;
+  background: #f5e069;
 }

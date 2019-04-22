@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    product: []
+    product: [],
   },
 
   /**
@@ -18,12 +18,12 @@ Page({
   onLoad: function(options) {
     let id = options.id
     // 缓存获取详情
-    let productList = (wx.getStorageSync('productList') || [])
-    this.setData({
-      product: productList[id - 1]
-    })
+    // let productList = (wx.getStorageSync('productList') || [])
+    // this.setData({
+    //   product: productList[id - 1]
+    // })
     // api获取详情
-    // this.getProduct(id)
+    this.getProduct(id)
   },
 
   /**
@@ -105,4 +105,14 @@ Page({
     let productId = event.currentTarget.dataset.id
     app.addToTrolley(this.data.product.id)
   },
+
+  onTapCommentEntry() {
+    let product = this.data.product
+    if (product.commentCount) {
+      wx.navigateTo({
+        url: `/pages/comment/comment?data=${JSON.stringify(this.data.product)}`
+      })
+    }
+  },
+
 })
