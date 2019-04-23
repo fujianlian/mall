@@ -2,6 +2,16 @@
 
 优达学城商城类小程序项目。本项目后端需要搭建腾讯云服务，构建数据库，实现api以及图片存储，小程序前端需要通过后端返回的接口实现一个商城的正常运行话功能，比如商品商品列表、订单列表、购物车，同时还可以练习微信账号授权登录，是一个比较综合的项目，需要具备一定的 **JavaScript、CSS以及SQL** 知识。
 
+## 小程序截图 
+ 
+![1](./screenshot/screenshot1.png) | ![2](./screenshot/screenshot2.png) | ![3](./screenshot/screenshot3.png) | ![4](./screenshot/screenshot4.png) | 
+| :--: | :--: | :--: | :--: | 
+| 首页 | 订单 | 购物车 | 个人中心 | 
+ 
+![1](./screenshot/screenshot5.png) | ![2](./screenshot/screenshot6.png) | ![3](./screenshot/screenshot7.png) | ![4](./screenshot/screenshot8.png) | 
+| :--: | :--: | :--: | :--: | 
+| 商品详情 | 添加评论 | 用户评论 | 未登录 |
+
 ## 运行前准备
 
 1. 注册[小程序开发帐号](https://mp.weixin.qq.com/cgi-bin/registermidpage?action=index)，完成注册之后，登录[微信公众平台官网](https://mp.weixin.qq.com/) ，点击 **“设置 -> 开发设置”**，获取你的 **AppID 帐号**，后面初始化项目需要用到。
