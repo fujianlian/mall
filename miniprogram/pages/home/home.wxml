@@ -15,7 +15,7 @@
   <image src="/images/line-black.png" class='separator-line'></image>
 </view>
 <view wx:for='{{productList}}' wx:if='{{ index%2 === 1 }}' wx:key='list' class='list'>
-  <navigator url="/pages/detail/detail?id={{pitem.id}}" wx:for='{{[productList[index],productList[index+1]]}}' wx:key="item" wx:for-index='pindex' wx:for-item='pitem' class='list-item list-item-right'>
+  <navigator url="/pages/detail/detail?id={{pitem._id}}" wx:for='{{[productList[index],productList[index+1]]}}' wx:key="item" wx:for-index='pindex' wx:for-item='pitem' class='list-item list-item-right'>
     <image src="{{pitem.image}}" class='list-item-image'></image>
     <view class='list-item-title'>{{pitem.name}}</view>
     <view class='list-item-bottom'>

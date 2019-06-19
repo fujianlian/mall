@@ -1,5 +1,7 @@
 //app.js
+
 App({
+
   onLaunch: function () {
     
     if (!wx.cloud) {
@@ -7,9 +9,27 @@ App({
     } else {
       wx.cloud.init({
         traceUser: true,
+        env: 'mall-7vt8m',
       })
     }
 
     this.globalData = {}
-  }
+  },
+
+  checkSession({
+    success,
+    error
+  }) {
+    wx.checkSession({
+      success: () => {
+        this.getUserInfo({
+          success,
+          error
+        })
+      },
+      fail: () => {
+        error && error()
+      }
+    })
+  },
 })
