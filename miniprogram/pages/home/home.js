@@ -1,66 +1,58 @@
 // pages/home/home.js
+
+const db = require('../../utils/db.js')
+const util = require('../../utils/util.js')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    // 商品列表
+    productList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function(options) {
+    this.getList()
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 获取商品列表
    */
-  onReady: function () {
+  getList() {
+    let self = this
+    wx.showLoading({
+      title: '正在加载中...',
+    })
 
+    db.getProductList().then(result => {
+      wx.hideLoading()
+
+      const productList = result.data
+      // get 2 digits price
+      productList.forEach(product => product.price = util.formatPrice(product.price))
+
+      if (productList.length) {
+        this.setData({
+          productList
+        })
+      }
+    }).catch(err => {
+      console.error(err)
+      wx.hideLoading()
+      wx.showToast({
+        title: '加载数据失败',
+      })
+      Ï
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  addToTrolley(event) {
+    //let productId = event.currentTarget.dataset.id
+    //app.addToTrolley(productId)
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

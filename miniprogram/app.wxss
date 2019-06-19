@@ -1,19 +1,89 @@
 /**app.wxss**/
-.container {
+page {
+  background: #f9f9f9;
+}
+
+.bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 144rpx;
+  z-index: -1;
+}
+
+.unlogin-card {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  box-sizing: border-box;
+  margin: 50rpx 27rpx 0;
+  height: 200rpx;
+  background: #FFFFFF;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.02);
+  border-radius: 13rpx;
+}
+
+.unlogin-head {
+  flex-shrink: 0;
+  margin-left: 53rpx;
+  height: 100rpx;
+  width: 100rpx;
+  background: #F5E069;
+  border-radius: 50%;
+}
+
+.unlogin-info {
+  flex: 1;
+  margin-left: 31rpx;
+}
+
+.unlogin-text {
+  line-height: 48rpx;
+  font-size: 34rpx;
+  color: rgba(29, 29, 38, 0.8);
+  font-weight: bold;
+}
+
+.unlogin-tips {
+  margin-top: 6rpx;
+  line-height: 33rpx;
+  font-size: 24rpx;
+  color: #8B8B8B;
+}
+
+.unlogin-btn {
+  margin: 34rpx auto 0;
+  width: 250rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #F5E069;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  text-align: center;
+  color: #34373D;
+  font-weight: bold;
 } 
 
-button {
-  background: initial;
+.empty-list {
+  display: flex;
+  flex-direction: column;
+  margin: 40rpx 30rpx;
+  background: white;
+  border-radius: 15rpx;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.05);
+  height: 420rpx;
+  justify-content: center;
+  align-items: center;
 }
 
-button:focus{
-  outline: 0;
+.empty-image {
+  margin-bottom: 29rpx;
+  width: 90rpx;
+  height: 90rpx;
+  opacity: 0.4;
 }
 
-button::after{
-  border: none;
+.empty-text {
+  font-size: 28rpx;
+  line-height: 42rpx;
+  color: rgba(139, 139, 139, 0.8);
 }
