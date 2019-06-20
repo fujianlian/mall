@@ -2,7 +2,7 @@
 
 优达学城商城类小程序项目。本项目使用的是云开发进行后端搭建，是一个比较综合的项目，需要具备一定的 **JavaScript、CSS** 知识。
 
-[tencent-cloud分支](https://github.com/fujianlian/mall/tree/tencent-cloud)是基于**腾讯云服务**进行后端开发的，相对比来说比较简单，建议选择**云开发**模式开发
+[tencent-cloud分支](https://github.com/fujianlian/mall/tree/tencent-cloud)是基于**腾讯云服务**进行后端开发的，相对比来说比较复杂，建议选择**云开发**模式开发
 
 ## 小程序截图 
  
@@ -27,12 +27,9 @@
  
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html) 
 
-
 # 运行准备
 
-## 运行前准备
-
-1. 注册[小程序开发帐号](https://mp.weixin.qq.com/cgi-bin/registermidpage?action=index)，完成注册之后，登录[微信公众平台官网](https://mp.weixin.qq.com/) ，点击 **“设置 -> 开发设置”**，获取你的 **AppID 帐号**，后面初始化项目需要用到。
+注册[小程序开发帐号](https://mp.weixin.qq.com/cgi-bin/registermidpage?action=index)，完成注册之后，登录[微信公众平台官网](https://mp.weixin.qq.com/) ，点击 **“设置 -> 开发设置”**，获取你的 **AppID 帐号**，后面初始化项目需要用到。
 
 ## 运行项目
 
