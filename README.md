@@ -2,6 +2,8 @@
 
 优达学城商城类小程序项目。本项目后端需要搭建腾讯云服务，构建数据库，实现api以及图片存储，小程序前端需要通过后端返回的接口实现一个商城的正常运行话功能，比如商品商品列表、订单列表、购物车，同时还可以练习微信账号授权登录，是一个比较综合的项目，需要具备一定的 **JavaScript、CSS以及SQL** 知识。
 
+当前分支是基于腾讯云服务进行后端开发的，[master分支](https://github.com/fujianlian/mall)是基于**小程序云开发**进行后端开发的，相对来说比较简单，建议选择这种模式开发
+
 ## 小程序截图 
  
 ![1](./screenshot/screenshot1.png) | ![2](./screenshot/screenshot2.png) | ![3](./screenshot/screenshot3.png) | ![4](./screenshot/screenshot4.png) | 
