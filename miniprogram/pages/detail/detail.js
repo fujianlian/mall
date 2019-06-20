@@ -81,9 +81,36 @@ Page({
     })
   },
 
-  addToTrolley(event) {
-    let productId = event.currentTarget.dataset.id
-    //app.addToTrolley(this.data.product.id)
+  addToTrolley() {
+
+    wx.showLoading({
+      title: '正在添加到购物车...',
+    })
+
+    db.addTrolley(this.data.product).then(result => {
+      wx.hideLoading()
+
+      const data = result.result
+
+      if (data) {
+        wx.showToast({
+          title: '已添加到购物车'
+        })
+      } else {
+        wx.showToast({
+          icon: 'none',
+          title: '添加到购物车失败',
+        })
+      }
+    }).catch(err => {
+      console.error(err)
+      wx.hideLoading()
+
+      wx.showToast({
+        icon: 'none',
+        title: '加入购物车'
+      })
+    })
   },
 
   onTapCommentEntry() {

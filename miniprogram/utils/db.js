@@ -40,4 +40,27 @@ module.exports = {
         return {}
       })
   },
+
+  getTrolleyList() {
+    return wx.cloud.callFunction({
+      name: 'getTrolleyList'
+    })
+  },
+
+  addTrolley(data) {
+    return util.isAuthenticated()
+      .then(() => {
+        return wx.cloud.callFunction({
+          name: 'addTrolley',
+          data,
+        })
+      })
+      .catch(() => {
+        wx.showToast({
+          icon: 'none',
+          title: '请先登录'
+        })
+        return {}
+      })
+  },
 }

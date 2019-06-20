@@ -35,7 +35,7 @@ Page({
       const productList = result.data
       // get 2 digits price
       productList.forEach(product => product.price = util.formatPrice(product.price))
-
+      console.log(productList)
       if (productList.length) {
         this.setData({
           productList
@@ -52,7 +52,36 @@ Page({
   },
 
   addToTrolley(event) {
-    //let productId = event.currentTarget.dataset.id
-    //app.addToTrolley(productId)
+    let index = event.currentTarget.dataset.index
+    let d = this.data.productList[index]
+  
+    wx.showLoading({
+      title: '正在添加到购物车...',
+    })
+  
+    db.addTrolley(d).then(result => {
+      wx.hideLoading()
+
+      const data = result.result
+
+      if (data) {
+        wx.showToast({
+          title: '已添加到购物车'
+        })
+      } else {
+        wx.showToast({
+          icon: 'none',
+          title: '添加到购物车失败',
+        })
+      }
+    }).catch(err => {
+      console.error(err)
+      wx.hideLoading()
+
+      wx.showToast({
+        icon: 'none',
+        title: '加入购物车'
+      })
+    })
   },
 })

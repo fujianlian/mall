@@ -13,11 +13,11 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const user = wxContext.OPENID
 
-  // Order List
-  const orderRes = await db.collection('order').where({
+  // trolley list
+  const trolleyRes = await db.collection('trolley').where({
     user,
   }).get()
-  const orderList = orderRes.data
+  const trolleyList = trolleyRes.data
 
-  return orderList
+  return trolleyList
 }
