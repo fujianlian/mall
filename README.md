@@ -43,6 +43,8 @@
 
 * 在数据库里创建 **order/product/review/trolley** 四个集合，将data/products.json导入到product集合中，注意修改image的地址前缀
 
+* env修改，可参考[这篇文章](https://blog.csdn.net/Sprintf_HelloWorld/article/details/86746684)
+
 * 上传云函数，运行即可
 
 ## 贡献
