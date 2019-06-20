@@ -104,7 +104,7 @@
 }
 
 .evaluation-num {
-  font-size: 18rpx;
+  font-size: 20rpx;
   line-height: 25rpx;
   margin-right: 9rpx;
   opacity: 0.4;

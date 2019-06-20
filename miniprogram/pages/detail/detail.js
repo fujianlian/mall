@@ -115,7 +115,7 @@ Page({
 
   onTapCommentEntry() {
     let product = this.data.product
-    if (product.commentCount) {
+    if (product.reviewCount) {
       wx.navigateTo({
         url: `/pages/comment/comment?data=${JSON.stringify(this.data.product)}`
       })

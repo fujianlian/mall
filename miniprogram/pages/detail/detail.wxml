@@ -21,7 +21,7 @@
   <view class='evaluation-wrapper' bindtap='onTapCommentEntry'>
     <view class='evaluation'>
       <view class='evaluation-title'>已买评价</view>
-      <view class='evaluation-num'>{{product.commentCount}}条</view>
+      <view class='evaluation-num'>{{product.reviewCount}} 条</view>
       <image src="/images/grey-arrow.png" class='evaluation-right'></image>
     </view>
     <view wx:if='{{product.firstComment.content}}' class='evaluation-text'>{{product.firstComment.content}}</view>

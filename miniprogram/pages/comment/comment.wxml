@@ -1,2 +1,19 @@
 <!--pages/comment/comment.wxml-->
-<text>pages/comment/comment.wxml</text>
+<product product-image="{{product.image}}" product-name="{{product.name}}" product-price="{{product.price}}">
+</product>
+<view class='comment-list'>
+  <view class='comment-title'>{{commentList.length}}条评价</view>
+  <view class='comment-card' wx:for='{{commentList}}' wx:key='id' wx:for-item='item'>
+    <image class='comment-avatar' src='{{item.avatar}}'></image>
+    <view class='comment-cnt'>
+      <view class='comment-top'>
+        <view class='comment-username'>{{item.username}}</view>
+        <view class="comment-time">{{item.createTime}}</view>
+      </view>
+      <view class='comment-content'>{{item.content}}</view>
+      <view class='preview-cnt' wx:if='{{item.images.length}}'>
+        <image class='preview-image' wx:for='{{item.images}}' wx:for-index='pIndex' wx:for-item='pItem' wx:key='preview-image' src='{{pItem}}' mode='aspectFill' bindtap='previewImg' data-urls='{{item.images}}' data-current='{{pItem}}'></image>
+      </view>
+    </view>
+  </view>
+</view>

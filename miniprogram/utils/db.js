@@ -81,4 +81,34 @@ module.exports = {
         return {}
       })
   },
+
+  addComment(data) {
+    return util.isAuthenticated()
+      .then(() => {
+        return wx.cloud.callFunction({
+          name: 'addComment',
+          data,
+        })
+      }).catch(() => {
+        wx.showToast({
+          icon: 'none',
+          title: 'Please Login First'
+        })
+        return {}
+      })
+  },
+
+  getComments(productId) {
+    return db.collection('review').where({
+      productId,
+    }).get()
+  },
+
+  uploadImage(imgPath) {
+    return wx.cloud.uploadFile({
+      cloudPath: `review/${util.getId()}`,
+      filePath: imgPath,
+    })
+  }
+
 }
