@@ -20,17 +20,17 @@
   </view>
   <scroll-view class='product-list' scroll-y scroll-with-animation enable-back-to-top>
     <view class='product-card' wx:for='{{trolleyList}}' wx:for-item='item' wx:key='id'>
-      <view class="trolley-check-wrapper  {{trolleyCheckMap[item.id] ? 'check' : ''}}" bindtap='onTapCheckSingle' data-id="{{item.id}}">
-        <image class="trolley-check" src='/images/check.png' wx:if="{{trolleyCheckMap[item.id]}}"></image>
+      <view class="trolley-check-wrapper  {{trolleyCheckMap[item.productId] ? 'check' : ''}}" bindtap='onTapCheckSingle' data-id="{{item.productId}}">
+        <image class="trolley-check" src='/images/check.png' wx:if="{{trolleyCheckMap[item.productId]}}"></image>
       </view>
       <image class="product-img" src="{{item.image}}"></image>
       <view class='product-info'>
         <view class='product-name'>{{item.name}}</view>
         <view class='product-price'>￥{{item.price}}</view>
         <view class='product-count-edit' wx:if='{{isTrolleyEdit}}'>
-          <view class='count-minus' bindtap='adjustTrolleyCount' data-type="reduce" data-id="{{item.id}}">-</view>
+          <view class='count-minus' bindtap='adjustTrolleyCount' data-type="reduce" data-id="{{item.productId}}">-</view>
           <view class='count-now'>{{item.count}}</view>
-          <view class='count-add' bindtap='adjustTrolleyCount' data-type="add" data-id="{{item.id}}">+</view>
+          <view class='count-add' bindtap='adjustTrolleyCount' data-type="add" data-id="{{item.productId}}">+</view>
         </view>
         <view class="product-count" wx:else>x {{item.count}}</view>
       </view>

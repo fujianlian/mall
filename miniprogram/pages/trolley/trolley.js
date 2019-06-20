@@ -11,7 +11,7 @@ Page({
   data: {
     userInfo: null,
     trolleyList: [], // 购物车商品列表
-    trolleyCheckMap: [], // 购物车中选中的id哈希表
+    trolleyCheckMap: {}, // 购物车中选中的id哈希表
     trolleyAccount: 0, // 购物车结算总价
     isTrolleyEdit: false, // 购物车是否处于编辑状态
     isTrolleyTotalCheck: false, // 购物车中商品是否全选
@@ -24,7 +24,7 @@ Page({
       })
       this.getList()
     }).catch(err => {
-      console.log("请先登录");
+      console.log('尚未通过身份验证');
     })
   },
 
@@ -70,22 +70,18 @@ Page({
     let trolleyCheckMap = this.data.trolleyCheckMap
     let trolleyList = this.data.trolleyList
     let isTrolleyTotalCheck = this.data.isTrolleyTotalCheck
-    let numTotalProduct
-    let numCheckedProduct = 0
     let trolleyAccount = this.data.trolleyAccount
-
     // 单项商品被选中/取消
-    trolleyCheckMap[checkId] = !trolleyCheckMap[checkId]
-
-    // 判断选中的商品个数是否需商品总数相等
-    numTotalProduct = trolleyList.length
-    trolleyCheckMap.forEach(checked => {
-      numCheckedProduct = checked ? numCheckedProduct + 1 : numCheckedProduct
+    trolleyCheckMap[checkId] = !trolleyCheckMap[checkId];
+    isTrolleyTotalCheck = true
+    trolleyList.forEach(product => {
+      if (!trolleyCheckMap[product.productId]) {
+        // not all product selected
+        isTrolleyTotalCheck = false
+      }
     })
-
-    isTrolleyTotalCheck = (numTotalProduct === numCheckedProduct) ? true : false
-    trolleyAccount = this.calcAccount(trolleyList, trolleyCheckMap)
-
+    console.log(trolleyCheckMap)
+    trolleyAccount = this.calcAccount(trolleyList, trolleyCheckMap);
     this.setData({
       trolleyCheckMap,
       isTrolleyTotalCheck,
@@ -104,7 +100,7 @@ Page({
 
     // 遍历并修改所有商品的状态
     trolleyList.forEach(product => {
-      trolleyCheckMap[product.id] = isTrolleyTotalCheck
+      trolleyCheckMap[product.productId] = isTrolleyTotalCheck
     })
     trolleyAccount = this.calcAccount(trolleyList, trolleyCheckMap)
     this.setData({
@@ -118,10 +114,10 @@ Page({
   calcAccount(trolleyList, trolleyCheckMap) {
     let account = 0
     trolleyList.forEach(product => {
-      account = trolleyCheckMap[product.id] ? account + product.price * product.count : account
+      account = trolleyCheckMap[product.productId] ? account + product.price * product.count : account
     })
 
-    return account
+    return util.formatPrice(account)
   },
 
   onTapEdit() {
@@ -146,7 +142,7 @@ Page({
     let index
 
     for (index = 0; index < trolleyList.length; index++) {
-      if (productId === trolleyList[index].id) {
+      if (productId === trolleyList[index].productId) {
         product = trolleyList[index]
         break
       }
@@ -231,7 +227,7 @@ Page({
     let trolleyList = this.data.trolleyList
 
     let needToPayProductList = trolleyList.filter(product => {
-      return !!trolleyCheckMap[product.id]
+      return !!trolleyCheckMap[product.productId]
     })
 
     qcloud.request({

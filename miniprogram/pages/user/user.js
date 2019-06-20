@@ -16,7 +16,7 @@ Page({
         userInfo
       })
     }).catch(err => {
-      console.log('请先登录');
+      console.log('尚未通过身份验证');
     })
   },
 

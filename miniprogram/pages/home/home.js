@@ -35,7 +35,6 @@ Page({
       const productList = result.data
       // get 2 digits price
       productList.forEach(product => product.price = util.formatPrice(product.price))
-      console.log(productList)
       if (productList.length) {
         this.setData({
           productList

@@ -20,7 +20,7 @@ Page({
       })
       this.getOrder()
     }).catch(err => {
-      console.log('此功能暂未开放');
+      console.log('尚未通过身份验证');
     })
   },
 
