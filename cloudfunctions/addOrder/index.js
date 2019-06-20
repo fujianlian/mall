@@ -14,6 +14,7 @@ exports.main = async (event, context) => {
   const user = wxContext.OPENID
 
   const productList = event.list || []
+  const isCheckout = !!event.isCheckout
 
   await db.collection('order').add({
     data: {
@@ -22,6 +23,12 @@ exports.main = async (event, context) => {
       productList,
     },
   })
+
+  if (isCheckout) {
+    await db.collection('trolley').where({
+      productId: db.command.in(productList.map(product => product.productId))
+    }).remove()
+  }
 
   return {}
 }

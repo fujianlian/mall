@@ -39,15 +39,14 @@ Page({
    */
   getList() {
     let self = this
-    wx.showLoading({
-      title: '刷新购物车数据...',
-    })
+    if (this.data.trolleyList.length == 0)
+      wx.showLoading({
+        title: '刷新购物车数据...',
+      })
 
     db.getTrolleyList().then(result => {
-      wx.hideLoading()
-
-      const data = result.result
-      console.log(data)
+      wx.hideLoading();
+      const data = result.result;
       if (data.length) {
         // update the total price for cart
         this.setData({
@@ -79,8 +78,7 @@ Page({
         // not all product selected
         isTrolleyTotalCheck = false
       }
-    })
-    console.log(trolleyCheckMap)
+    });
     trolleyAccount = this.calcAccount(trolleyList, trolleyCheckMap);
     this.setData({
       trolleyCheckMap,
@@ -178,40 +176,20 @@ Page({
     wx.showLoading({
       title: '更新购物车数据...',
     })
-
-    let trolleyList = this.data.trolleyList
-    qcloud.request({
-      url: config.service.updateTrolley,
-      method: 'POST',
-      login: true,
-      data: {
-        list: trolleyList
-      },
-      success: result => {
-        wx.hideLoading()
-
-        let data = result.data
-
-        if (!data.code) {
-          this.setData({
-            isTrolleyEdit: false
-          })
-        } else {
-          wx.showToast({
-            icon: 'none',
-            title: '更新购物车失败'
-          })
-        }
-      },
-      fail: () => {
-        wx.hideLoading()
-
+    let trolleyList =
+      db.updateTrolley(this.data.trolleyList).then(result => {
+        wx.hideLoading();
+        this.setData({
+          isTrolleyEdit: false
+        })
+      }).catch(err => {
+        console.error(err)
+        wx.hideLoading();
         wx.showToast({
           icon: 'none',
           title: '更新购物车失败'
         })
-      }
-    })
+      })
   },
 
   onTapPay() {
@@ -230,39 +208,26 @@ Page({
       return !!trolleyCheckMap[product.productId]
     })
 
-    qcloud.request({
-      url: config.service.addOrder,
-      login: true,
-      method: 'POST',
-      data: {
-        list: needToPayProductList,
-        isInstantBuy: false
-      },
-      success: result => {
-        wx.hideLoading()
-
-        let data = result.data
-
-        if (!data.code) {
-          wx.showToast({
-            title: '结算成功',
-          })
-          self.getList()
-        } else {
-          wx.showToast({
-            icon: 'none',
-            title: '结算失败',
-          })
-        }
-      },
-      fail: () => {
-        wx.hideLoading()
-
+    db.addOrder({
+      list: needToPayProductList,
+      isCheckout: true
+    }).then(result => {
+      wx.hideLoading()
+      const data = result.result
+      if (data) {
         wx.showToast({
-          icon: 'none',
-          title: '结算失败',
+          title: '结算成功',
         })
+        self.getList()
       }
+    }).catch(err => {
+      console.error(err)
+      wx.hideLoading()
+
+      wx.showToast({
+        icon: 'none',
+        title: '结算失败',
+      })
     })
   },
 })

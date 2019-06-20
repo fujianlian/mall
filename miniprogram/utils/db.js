@@ -63,4 +63,22 @@ module.exports = {
         return {}
       })
   },
+
+  updateTrolley(list) {
+    return util.isAuthenticated()
+      .then(() => {
+        return wx.cloud.callFunction({
+          name: 'updateTrolley',
+          data: {
+            list,
+          },
+        })
+      }).catch(() => {
+        wx.showToast({
+          icon: 'none',
+          title: '请先登录'
+        })
+        return {}
+      })
+  },
 }

@@ -32,9 +32,10 @@ Page({
 
   getOrder() {
     let that = this
-    wx.showLoading({
-      title: '刷新订单数据...',
-    })
+    if (this.data.orderList.length == 0)
+      wx.showLoading({
+        title: '刷新订单数据...',
+      })
     db.getOrderList().then(result => {
       wx.hideLoading()
       that.setData({
