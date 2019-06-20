@@ -9,6 +9,11 @@
     "pages/comment/comment"
   ],
   "tabBar": {
+    "color": "#5d5f64",
+    "selectedColor": "#5d5f64",
+    "backgroundColor": "#fff",
+    "position": "bottom",
+    "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/home/home",

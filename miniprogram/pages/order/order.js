@@ -1,66 +1,59 @@
 // pages/order/order.js
+
+const db = require('../../utils/db.js')
+const util = require('../../utils/util')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userInfo: null,
+    orderList: [], // 订单列表
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onShow() {
+    util.getUserInfo().then(userInfo => {
+      this.setData({
+        userInfo
+      })
+      this.getOrder()
+    }).catch(err => {
+      console.log('此功能暂未开放');
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onTapLogin(event) {
+    this.setData({
+      userInfo: event.detail.userInfo
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  getOrder() {
+    let that = this
+    wx.showLoading({
+      title: '刷新订单数据...',
+    })
+    db.getOrderList().then(result => {
+      wx.hideLoading()
+      that.setData({
+        orderList: result.result
+      })
+    }).catch(err => {
+      console.error(err)
+      wx.hideLoading()
+      wx.showToast({
+        title: '刷新订单数据失败',
+      })
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  goComment(event) {
+    let product = event.currentTarget.dataset.item
+    wx.navigateTo({
+      url: '/pages/add-comment/add-comment?data=' + JSON.stringify(product),
+    })
   }
+
 })

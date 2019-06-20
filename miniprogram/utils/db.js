@@ -1,3 +1,5 @@
+const util = require('./util')
+
 const db = wx.cloud.database({
   env: 'mall-7vt8m'
 })
@@ -14,5 +16,28 @@ module.exports = {
         id
       },
     })
+  },
+
+  getOrderList() {
+    return wx.cloud.callFunction({
+      name: 'getOrderList'
+    })
+  },
+
+  addOrder(data) {
+    return util.isAuthenticated()
+      .then(() => {
+        return wx.cloud.callFunction({
+          name: 'addOrder',
+          data,
+        })
+      })
+      .catch(() => {
+        wx.showToast({
+          icon: 'none',
+          title: '请先登录'
+        })
+        return {}
+      })
   },
 }

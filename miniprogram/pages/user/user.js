@@ -16,7 +16,7 @@ Page({
         userInfo
       })
     }).catch(err => {
-      console.log('此功能暂未开放');
+      console.log('请先登录');
     })
   },
 
@@ -36,7 +36,7 @@ Page({
   onTapService() {
     wx.showToast({
       icon: 'none',
-      title: 'This function is not open yet.'
+      title: '此功能暂未开放'
     })
   }
 })

@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    product: [],
+    product: {},
   },
 
   /**
@@ -48,43 +48,37 @@ Page({
       title: '商品购买中...',
     })
 
-   /* let product = Object.assign({
+    const productToBuy = Object.assign({
       count: 1
     }, this.data.product)
+    productToBuy.productId = productToBuy._id
+    console.log(productToBuy)
+    db.addOrder({
+      list: [productToBuy]
+    }).then(result => {
+      wx.hideLoading()
 
-    qcloud.request({
-      url: config.service.addOrder,
-      login: true,
-      method: 'POST',
-      data: {
-        list: [product],
-        isInstantBuy: true
-      },
-      success: result => {
-        wx.hideLoading()
+      const data = result.result
 
-        let data = result.data
-
-        if (!data.code) {
-          wx.showToast({
-            title: '商品购买成功',
-          })
-        } else {
-          wx.showToast({
-            icon: 'none',
-            title: '商品购买失败',
-          })
-        }
-      },
-      fail: () => {
-        wx.hideLoading()
-
+      console.log(data)
+      if (data) {
+        wx.showToast({
+          title: '商品购买成功'
+        })
+      } else {
         wx.showToast({
           icon: 'none',
           title: '商品购买失败',
         })
       }
-    })*/
+    }).catch(err => {
+      console.error(err)
+      wx.hideLoading()
+      wx.showToast({
+        icon: 'none',
+        title: '商品购买失败',
+      })
+    })
   },
 
   addToTrolley(event) {
@@ -100,5 +94,4 @@ Page({
       })
     }
   }
-
 })
